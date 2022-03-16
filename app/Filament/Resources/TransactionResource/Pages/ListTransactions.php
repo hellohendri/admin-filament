@@ -8,4 +8,11 @@ use Filament\Resources\Pages\ListRecords;
 class ListTransactions extends ListRecords
 {
     protected static string $resource = TransactionResource::class;
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            TransactionResource\Widgets\TransactionOverview::class,
+        ];
+    }
 }

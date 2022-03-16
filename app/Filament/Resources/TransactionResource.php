@@ -9,7 +9,6 @@ use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Forms\Components\Card;
 use Filament\Tables;
 
 class TransactionResource extends Resource
@@ -19,6 +18,13 @@ class TransactionResource extends Resource
     protected static ?string $navigationGroup = 'Transactions';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function getWidgets(): array
+    {
+        return [
+            Widgets\TransactionOverview::class,
+        ];
+    }
 
     public static function form(Form $form): Form
     {
