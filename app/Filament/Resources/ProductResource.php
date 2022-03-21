@@ -31,7 +31,7 @@ class ProductResource extends Resource
                 Forms\Components\BelongsToSelect::make('product_category')
                     ->required()
                     ->relationship('product_category_id', 'product_category'),
-                Forms\Components\BelongsToSelect::make('outlet')
+                Forms\Components\BelongsToSelect::make('outlet_name')
                     ->relationship('outlet_name_id', 'outlet_name'),
                 Forms\Components\TextInput::make('stocks')
                     ->required(),
