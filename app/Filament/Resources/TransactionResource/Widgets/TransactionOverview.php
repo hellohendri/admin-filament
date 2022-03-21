@@ -32,11 +32,11 @@ class TransactionOverview extends BaseWidget
 
         return [
             Card::make('Total Pemasukan', $incomeWithCurrency)
-                ->description('Total Pemasukan Dari Semua Jenis Transaksi')
+                ->description('Total Pemasukan Bulan Ini')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
             Card::make('Total Pengeluaran', $expenseWithCurrency)
-                ->description('Total Pengeluaran Dari Semua Jenis Transaksi')
+                ->description('Total Pengeluaran Bulan Ini')
                 ->descriptionIcon('heroicon-s-trending-down')
                 ->color('danger'),
             Card::make('Saldo', $balanceWithCurrency)
