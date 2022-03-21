@@ -10,6 +10,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
 
 class TransactionResource extends Resource
 {
@@ -76,7 +79,28 @@ class TransactionResource extends Resource
                     ->color('danger'),
             ])
             ->filters([
-                //
+                SelectFilter::make('transaction_type')
+                    ->options([
+                        '1' => 'Masuk',
+                        '2' => 'Keluar',
+                    ])
+                    ->column('transaction_type'),
+                Filter::make('date')
+                    ->form([
+                        Forms\Components\DatePicker::make('date_from'),
+                        Forms\Components\DatePicker::make('date_until')->default(now()),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['date_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            )
+                            ->when(
+                                $data['date_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            );
+                    })
             ]);
     }
 
