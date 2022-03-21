@@ -52,13 +52,17 @@ class TransactionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('payment_method_id.payment_method'),
-                Tables\Columns\TextColumn::make('transaction_type_id.transaction_type'),
-                Tables\Columns\TextColumn::make('transaction_category_id.transaction_category'),
-                Tables\Columns\TextColumn::make('total')->money('idr', true),
-                Tables\Columns\TextColumn::make('description'),
+                // Tables\Columns\TextColumn::make('payment_method_id.payment_method'),
+                Tables\Columns\TextColumn::make('transaction_type_id.transaction_type')
+                    ->label("Tipe Transaksi"),
+                // Tables\Columns\TextColumn::make('transaction_category_id.transaction_category'),
+                Tables\Columns\TextColumn::make('total')
+                    ->money('idr', true),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi'),
                 // Tables\Columns\TextColumn::make('created_at')
                 //     ->dateTime(),
                 // Tables\Columns\TextColumn::make('updated_at')
