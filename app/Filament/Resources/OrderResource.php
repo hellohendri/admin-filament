@@ -11,6 +11,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Card;
 
 class OrderResource extends Resource
 {
@@ -23,47 +26,96 @@ class OrderResource extends Resource
 
     public static function form(Form $form): Form
     {
-
+        date_default_timezone_set("Asia/Bangkok");
+        $currentDate = date('M d, Y h:i');
         $orderNumber = 'OR-' . random_int(100000, 999999);
-        $getUser = auth()->user()->id;
+        $getUser = auth()->user()->name;
 
         return $form
             ->schema([
-                // Forms\Components\TextInput::make('cashier')
+                Section::make('Konfigurasi Order')
+                    ->schema([
+                        Forms\Components\BelongsToSelect::make('cashier')
+                            ->placeholder($getUser)
+                            ->default($getUser)
+                            ->relationship('cashier_id', 'name')
+                            ->disabled()
+                            ->label('Cashier'),
+                        Forms\Components\TextInput::make('no_order')
+                            ->placeholder($orderNumber)
+                            ->default($orderNumber)
+                            ->required()
+                            ->disabled()
+                            ->label('No. Order'),
+                        Forms\Components\BelongsToSelect::make('customer_name')
+                            ->relationship('customer_name_id', 'name')
+                            ->label('Nama Customer')
+                            ->placeholder('Pilih Customer'),
+                        Forms\Components\BelongsToSelect::make('payment_method')
+                            ->relationship('payment_method_id', 'payment_method')
+                            ->label('Metode Pembayaran')
+                            ->placeholder('Pilih Metode Pembayaran'),
+                        Forms\Components\BelongsToSelect::make('payment_status')
+                            ->relationship('payment_status_id', 'payment_status')
+                            ->label('Status Pembayaran')
+                            ->placeholder('Pilih Status Pembayaran'),
+                        Forms\Components\DateTimePicker::make('date')
+                            ->label('Tanggal')
+                            ->withoutSeconds()
+                            ->default(date(now()))
+                            ->placeholder(date(now()))
+                            ->required(),
+                    ])
+                    ->columns(3),
+
+                Section::make('Produk')
+                    ->schema([
+                        Repeater::make(' ')
+                            ->schema([
+                                Forms\Components\BelongsToSelect::make('product_name')
+                                    ->relationship('product_name_id', 'name')
+                                    ->label('Nama Produk')
+                                    ->placeholder('Pilih Produk'),
+                                Forms\Components\TextInput::make('quantity')
+                                    ->label('Jumlah')
+                                    ->required(),
+                                Forms\Components\TextInput::make('total_price')
+                                    ->label('Harga')
+                                    ->required()
+                                    ->maxLength(255),
+                            ])
+                            ->columns(3)
+                            ->defaultItems(2)
+                            ->createItemButtonLabel('Tambah Produk'),
+                    ]),
+                // Repeater::make('Produk')
+                //     ->schema([
+                //         Forms\Components\BelongsToSelect::make('product_name')
+                //             ->relationship('product_name_id', 'name')
+                //             ->label('Nama Produk')
+                //             ->placeholder('Pilih Produk'),
+                //         Forms\Components\TextInput::make('quantity')
+                //             ->label('Jumlah')
+                //             ->required(),
+                //         Forms\Components\TextInput::make('total_price')
+                //             ->label('Harga')
+                //             ->required()
+                //             ->maxLength(255),
+                //     ])
+                //     ->columns(3)
+                //     ->defaultItems(2)
+                //     ->createItemButtonLabel('Tambah Produk'),
+                // Forms\Components\BelongsToSelect::make('product_name')
+                //     ->relationship('product_name_id', 'name')
+                //     ->label('Nama Produk')
+                //     ->placeholder('Pilih Produk'),
+                // Forms\Components\TextInput::make('quantity')
+                //     ->label('Jumlah')
+                //     ->required(),
+                // Forms\Components\TextInput::make('total_price')
+                //     ->label('Harga')
+                //     ->required()
                 //     ->maxLength(255),
-                Forms\Components\BelongsToSelect::make('cashier')
-                    ->default($getUser)
-                    ->relationship('cashier_id', 'name')
-                    ->disabled()
-                    ->label('Cashier'),
-                Forms\Components\TextInput::make('no_order')
-                    ->default($orderNumber)
-                    ->required()
-                    ->disabled()
-                    ->label('No. Order'),
-                Forms\Components\BelongsToSelect::make('customer_name')
-                    ->relationship('customer_name_id', 'name')
-                    ->label('Nama Customer')
-                    ->placeholder('Pilih Customer'),
-                Forms\Components\BelongsToSelect::make('payment_method')
-                    ->relationship('payment_method_id', 'payment_method')
-                    ->label('Metode Pembayaran')
-                    ->placeholder('Pilih Metode Pembayaran'),
-                Forms\Components\BelongsToSelect::make('payment_status')
-                    ->relationship('payment_status_id', 'payment_status')
-                    ->label('Status Pembayaran')
-                    ->placeholder('Pilih Status Pemabayaran'),
-                Forms\Components\BelongsToSelect::make('product_name')
-                    ->relationship('product_name_id', 'name')
-                    ->label('Nama Produk')
-                    ->placeholder('Pilih Produk'),
-                Forms\Components\TextInput::make('quantity')
-                    ->required(),
-                Forms\Components\TextInput::make('total_price')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date')
-                    ->required(),
             ]);
     }
 

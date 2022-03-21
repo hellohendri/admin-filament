@@ -13,6 +13,8 @@ use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Grid;
+
 
 class TransactionResource extends Resource
 {
@@ -31,9 +33,15 @@ class TransactionResource extends Resource
 
     public static function form(Form $form): Form
     {
+        date_default_timezone_set("Asia/Bangkok");
+        $currentDate = date('M d, Y');
+
         return $form
+
             ->schema([
                 Forms\Components\DatePicker::make('date')
+                    ->placeholder(date(now()))
+                    ->default(date(now()))
                     ->required(),
                 Forms\Components\BelongsToSelect::make('payment_method')
                     ->relationship('payment_method_id', 'payment_method'),
@@ -44,9 +52,9 @@ class TransactionResource extends Resource
                 Forms\Components\TextInput::make('total')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\Textarea::make('description')
                     ->required()
-                    ->maxLength(255),
+                    ->helperText('Tuliskan detail transaksi disini (Contoh: Peluanasan Invoice PT ATP 09/03/2022).'),
             ]);
     }
 
