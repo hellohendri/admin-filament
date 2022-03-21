@@ -65,7 +65,8 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('total')
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Deskripsi'),
+                    ->label('Deskripsi')
+                    ->limit('30'),
                 // Tables\Columns\TextColumn::make('created_at')
                 //     ->dateTime(),
                 // Tables\Columns\TextColumn::make('updated_at')
