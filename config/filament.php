@@ -187,6 +187,9 @@ return [
     */
 
     'layout' => [
+        'sidebar' => [
+            'is_collapsible_on_desktop' => true,
+        ],
         'forms' => [
             'actions' => [
                 'alignment' => 'left',
@@ -194,7 +197,7 @@ return [
             'have_inline_labels' => false,
         ],
         'footer' => [
-            'should_show_logo' => true,
+            'should_show_logo' => false,
         ],
         'max_content_width' => null,
         'notifications' => [
