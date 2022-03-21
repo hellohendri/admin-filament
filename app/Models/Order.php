@@ -27,4 +27,29 @@ class Order extends Model
         "total_price",
         "date",
     ];
+
+    public function cashier_id()
+    {
+        return $this->belongsTo(User::class, 'name');
+    }
+
+    public function customer_name_id()
+    {
+        return $this->belongsTo(Customer::class, 'name');
+    }
+
+    public function payment_method_id()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method');
+    }
+
+    public function payment_status_id()
+    {
+        return $this->belongsTo(PaymentStatus::class, 'payment_status');
+    }
+
+    public function product_name_id()
+    {
+        return $this->belongsTo(Product::class, 'name');
+    }
 }

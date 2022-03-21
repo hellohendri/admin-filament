@@ -66,7 +66,8 @@ class TransactionResource extends Resource
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi')
-                    ->limit('30'),
+                    ->limit('30')
+                    ->searchable(),
                 // Tables\Columns\TextColumn::make('created_at')
                 //     ->dateTime(),
                 // Tables\Columns\TextColumn::make('updated_at')
