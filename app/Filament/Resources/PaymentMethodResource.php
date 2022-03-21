@@ -17,7 +17,7 @@ class PaymentMethodResource extends Resource
 
     protected static ?string $navigationGroup = 'Master Management';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-cash';
 
     public static function form(Form $form): Form
     {

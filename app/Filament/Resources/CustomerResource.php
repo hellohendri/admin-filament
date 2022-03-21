@@ -17,7 +17,7 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationGroup = 'Sales';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-emoji-happy';
 
     public static function form(Form $form): Form
     {

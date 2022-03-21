@@ -20,7 +20,7 @@ class TransactionResource extends Resource
 
     protected static ?string $navigationGroup = 'Transactions';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function getWidgets(): array
     {

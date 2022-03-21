@@ -17,7 +17,7 @@ class PaymentStatusResource extends Resource
 
     protected static ?string $navigationGroup = 'Sales';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-badge-check';
 
     public static function form(Form $form): Form
     {
