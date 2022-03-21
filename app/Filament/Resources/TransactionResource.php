@@ -33,15 +33,14 @@ class TransactionResource extends Resource
 
     public static function form(Form $form): Form
     {
-        date_default_timezone_set("Asia/Bangkok");
         $currentDate = date('M d, Y');
 
         return $form
 
             ->schema([
                 Forms\Components\DatePicker::make('date')
-                    ->placeholder(date(now()))
-                    ->default(date(now()))
+                    ->placeholder(date(now($tz = "Asia/Bangkok")))
+                    ->default(date(now($tz = "Asia/Bangkok")))
                     ->required(),
                 Forms\Components\BelongsToSelect::make('payment_method')
                     ->relationship('payment_method_id', 'payment_method'),
