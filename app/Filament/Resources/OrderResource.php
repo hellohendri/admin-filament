@@ -49,7 +49,7 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('no_order')
                             ->label('No. Order')
                             ->placeholder($orderNumber)
-                            ->default(123456)
+                            ->default($orderNumber)
                             ->disabled(),
                         Forms\Components\BelongsToSelect::make('customer_name')
                             ->relationship('customer_name_id', 'name')
