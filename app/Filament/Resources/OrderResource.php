@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Product;
 use Doctrine\DBAL\Query;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -30,6 +32,7 @@ class OrderResource extends Resource
         $currentDate = date('M d, Y h:i');
         $orderNumber = 'OR-' . random_int(100000, 999999);
         $getUser = auth()->user()->name;
+        $defaultCustomer = Customer::where('id', 2);
 
         return $form
             ->schema([
@@ -50,7 +53,8 @@ class OrderResource extends Resource
                         Forms\Components\BelongsToSelect::make('customer_name')
                             ->relationship('customer_name_id', 'name')
                             ->label('Nama Customer')
-                            ->placeholder('Pilih Customer'),
+                            ->placeholder('Pilih Customer')
+                            ->default($defaultCustomer),
                         Forms\Components\BelongsToSelect::make('payment_method')
                             ->relationship('payment_method_id', 'payment_method')
                             ->label('Metode Pembayaran')
@@ -72,20 +76,30 @@ class OrderResource extends Resource
                     ->schema([
                         Repeater::make(' ')
                             ->schema([
-                                Forms\Components\BelongsToSelect::make('product_name')
-                                    ->relationship('product_name_id', 'name')
+                                Forms\Components\Select::make('product_name')
+                                    // ->relationship('product_name_id', 'name')
                                     ->label('Nama Produk')
-                                    ->placeholder('Pilih Produk'),
+                                    ->options(Product::where('outlet_name', 1)
+                                        ->pluck('name', 'id')
+                                        ->toArray())
+                                    ->placeholder('Pilih Produk')
+                                    ->reactive()
+                                    ->required(),
                                 Forms\Components\TextInput::make('quantity')
                                     ->label('Jumlah')
+                                    ->default(1)
                                     ->required(),
-                                Forms\Components\TextInput::make('total_price')
+                                Forms\Components\Select::make('total_price')
                                     ->label('Harga')
-                                    ->required()
-                                    ->maxLength(255),
+                                    ->options(Product::all()
+                                        ->pluck('price', 'id'))
+                                    ->placeholder('Price will be auto updated!')
+                                    ->default('4900')
+                                    ->disabled()
+                                    ->required(),
                             ])
                             ->columns(3)
-                            ->defaultItems(2)
+                            ->defaultItems(1)
                             ->createItemButtonLabel('Tambah Produk'),
                     ]),
             ]);
