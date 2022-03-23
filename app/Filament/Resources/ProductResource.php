@@ -56,16 +56,14 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('product_category_id.product_category'),
                 Tables\Columns\TextColumn::make('outlet_name_id.outlet_name'),
                 Tables\Columns\TextColumn::make('stocks'),
-                Tables\Columns\TextColumn::make('cogs'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('cogs')
+                    ->money('idr', true),
+                Tables\Columns\TextColumn::make('price')
+                    ->money('idr', true),
                 Tables\Columns\TextColumn::make('production_date')
                     ->date(),
                 Tables\Columns\TextColumn::make('expired_date')
                     ->date(),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
             ])
             ->filters([
                 //

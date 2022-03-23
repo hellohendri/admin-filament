@@ -81,27 +81,30 @@ class OrderResource extends Resource
                                     ->label('Nama Produk')
                                     ->options(Product::where('outlet_name', 1)->pluck('name', 'id')->toArray())
                                     ->placeholder('Pilih Produk')
-                                    ->disablePlaceholderSelection()
                                     ->required()
                                     ->reactive()
-                                    ->afterStateUpdated(fn (collable $set) => $set('total_price', null)),
+                                    ->afterStateUpdated(fn (callable $set) => $set('total_price', null)),
                                 Forms\Components\TextInput::make('quantity')
                                     ->label('Jumlah')
                                     ->default(1)
+                                    ->reactive()
                                     ->required(),
                                 Forms\Components\Select::make('total_price')
                                     ->label('Harga')
-                                    ->options(Product::all()
-                                        ->pluck('price', 'id'))
-                                    ->placeholder(function (collable $get) {
+                                    ->placeholder(function (callable $get) {
                                         $selectedProduct = Product::find($get('product_name'));
                                         if (!$selectedProduct) {
-                                            return Product::all()->pluck('price', 'id');
+                                            return "0";
                                         }
-                                        return $selectedProduct->price->pluck('price', 'id');
+                                        return $selectedProduct->value('price');
                                     })
-                                    ->default('4900')
-                                    ->disabled()
+                                    ->default(function (callable $get) {
+                                        $selectedProduct = Product::find($get('product_name'));
+                                        if (!$selectedProduct) {
+                                            return "0";
+                                        }
+                                        return $selectedProduct->value('price');
+                                    })
                                     ->required(),
                             ])
                             ->columns(3)

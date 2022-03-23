@@ -47,19 +47,16 @@ class TransactionResource extends Resource
                             ->relationship('payment_method_id', 'payment_method')
                             ->label('Metode Pembayaran')
                             ->placeholder('Pilih Metode Pembayaran')
-                            ->disablePlaceholderSelection()
                             ->required(),
                         Forms\Components\BelongsToSelect::make('transaction_type')
                             ->relationship('transaction_type_id', 'transaction_type')
                             ->label('Tipe Transaksi')
                             ->placeholder('Pilih Tipe Transaksi')
-                            ->disablePlaceholderSelection()
                             ->required(),
                         Forms\Components\BelongsToSelect::make('transaction_category')
                             ->relationship('transaction_category_id', 'transaction_category')
                             ->label('Kategori Transaksi')
                             ->placeholder('Pilih Kategori Transaksi')
-                            ->disablePlaceholderSelection()
                             ->required(),
                         Forms\Components\TextInput::make('total')
                             ->required()
@@ -81,20 +78,14 @@ class TransactionResource extends Resource
                     ->label('Tanggal')
                     ->date()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('payment_method_id.payment_method'),
                 Tables\Columns\TextColumn::make('transaction_type_id.transaction_type')
                     ->label("Tipe Transaksi"),
-                // Tables\Columns\TextColumn::make('transaction_category_id.transaction_category'),
                 Tables\Columns\TextColumn::make('total')
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit('30')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
             ])
             ->defaultSort('date', 'desc')
             ->pushActions([
