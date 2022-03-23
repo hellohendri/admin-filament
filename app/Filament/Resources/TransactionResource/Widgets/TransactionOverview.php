@@ -16,18 +16,24 @@ class TransactionOverview extends BaseWidget
 
         $currentMonth = date('m');
 
-        $income = Transaction::where('transaction_type', 1)
+        $incomeThisMonth = Transaction::where('transaction_type', 1)
             ->whereRaw('MONTH(date) = ' . $currentMonth)
             ->sum('total');
 
-        $expense = Transaction::where('transaction_type', 2)
+        $expenseThisMonth = Transaction::where('transaction_type', 2)
             ->whereRaw('MONTH(date) = ' . $currentMonth)
+            ->sum('total');
+
+        $income = Transaction::where('transaction_type', 1)
+            ->sum('total');
+
+        $expense = Transaction::where('transaction_type', 2)
             ->sum('total');
 
         $balance = $income - $expense;
 
-        $incomeWithCurrency = "Rp " . number_format($income, 2, ',', '.');
-        $expenseWithCurrency = "Rp " . number_format($expense, 2, ',', '.');
+        $incomeWithCurrency = "Rp " . number_format($incomeThisMonth, 2, ',', '.');
+        $expenseWithCurrency = "Rp " . number_format($expenseThisMonth, 2, ',', '.');
         $balanceWithCurrency = "Rp " . number_format($balance, 2, ',', '.');
 
         return [
