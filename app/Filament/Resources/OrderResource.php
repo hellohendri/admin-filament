@@ -87,23 +87,25 @@ class OrderResource extends Resource
                                 Forms\Components\TextInput::make('quantity')
                                     ->label('Jumlah')
                                     ->default(1)
+                                    ->required()
                                     ->reactive()
-                                    ->required(),
-                                Forms\Components\Select::make('total_price')
+                                    ->afterStateUpdated(fn (callable $set) => $set('total_price', null)),
+                                Forms\Components\TextInput::make('total_price')
                                     ->label('Harga')
                                     ->placeholder(function (callable $get) {
                                         $selectedProduct = Product::find($get('product_name'));
-                                        if (!$selectedProduct) {
-                                            return "0";
+                                        $quantity = $get('quantity');
+                                        $totalPrice = 0;
+
+                                        if (!$selectedProduct && !$quantity) {
+                                            return "Rp " . $totalPrice;
+                                        } elseif (!$selectedProduct) {
+                                            return "Rp " . $totalPrice;
                                         }
-                                        return $selectedProduct->value('price');
-                                    })
-                                    ->default(function (callable $get) {
-                                        $selectedProduct = Product::find($get('product_name'));
-                                        if (!$selectedProduct) {
-                                            return "0";
-                                        }
-                                        return $selectedProduct->value('price');
+
+                                        $totalPrice += $selectedProduct->price * $quantity;
+
+                                        return "Rp " . number_format($totalPrice, 2, ',', '.');
                                     })
                                     ->required(),
                             ])
