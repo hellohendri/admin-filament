@@ -6,6 +6,8 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\PaymentMethod;
+use App\Models\PaymentStatus;
 use App\Models\Product;
 use Doctrine\DBAL\Query;
 use Filament\Forms;
@@ -47,28 +49,28 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('no_order')
                             ->placeholder($orderNumber)
                             ->default($orderNumber)
-                            ->required()
                             ->disabled()
                             ->label('No. Order'),
                         Forms\Components\BelongsToSelect::make('customer_name')
                             ->relationship('customer_name_id', 'name')
                             ->label('Nama Customer')
                             ->placeholder('Pilih Customer')
-                            ->default($defaultCustomer),
+                            ->default(Customer::where('id', 2)),
                         Forms\Components\BelongsToSelect::make('payment_method')
                             ->relationship('payment_method_id', 'payment_method')
                             ->label('Metode Pembayaran')
-                            ->placeholder('Pilih Metode Pembayaran'),
+                            ->placeholder('Pilih Metode Pembayaran')
+                            ->default(PaymentMethod::where('id', 1)),
                         Forms\Components\BelongsToSelect::make('payment_status')
                             ->relationship('payment_status_id', 'payment_status')
                             ->label('Status Pembayaran')
-                            ->placeholder('Pilih Status Pembayaran'),
+                            ->placeholder('Pilih Status Pembayaran')
+                            ->default(PaymentStatus::where('id', 1)),
                         Forms\Components\DateTimePicker::make('date')
                             ->label('Tanggal')
                             ->withoutSeconds()
                             ->default(date(now($tz = "Asia/Bangkok")))
-                            ->placeholder(date(now($tz = "Asia/Bangkok")))
-                            ->required(),
+                            ->placeholder(date(now($tz = "Asia/Bangkok"))),
                     ])
                     ->columns(3),
 
@@ -86,12 +88,14 @@ class OrderResource extends Resource
                                     ->afterStateUpdated(fn (callable $set) => $set('total_price', null)),
                                 Forms\Components\TextInput::make('quantity')
                                     ->label('Jumlah')
+                                    ->numeric()
                                     ->default(1)
                                     ->required()
                                     ->reactive()
                                     ->afterStateUpdated(fn (callable $set) => $set('total_price', null)),
                                 Forms\Components\TextInput::make('total_price')
                                     ->label('Harga')
+                                    ->numeric()
                                     ->placeholder(function (callable $get) {
                                         $selectedProduct = Product::find($get('product_name'));
                                         $quantity = $get('quantity');
@@ -107,7 +111,22 @@ class OrderResource extends Resource
 
                                         return "Rp " . number_format($totalPrice, 2, ',', '.');
                                     })
-                                    ->required(),
+                                    ->default(function (callable $get) {
+                                        $selectedProduct = Product::find($get('product_name'));
+                                        $quantity = $get('quantity');
+                                        $totalPrice = 0;
+
+                                        if (!$selectedProduct && !$quantity) {
+                                            return $totalPrice;
+                                        } elseif (!$selectedProduct) {
+                                            return $totalPrice;
+                                        }
+
+                                        $totalPrice += $selectedProduct->price * $quantity;
+
+                                        return $totalPrice;
+                                    })
+                                    ->disabled(),
                             ])
                             ->columns(3)
                             ->defaultItems(1)
