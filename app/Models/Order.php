@@ -22,7 +22,6 @@ class Order extends Model
         "customer_name",
         "payment_method",
         "payment_status",
-        "product_name",
         "quantity",
         "total_price",
         "date",
@@ -46,10 +45,5 @@ class Order extends Model
     public function payment_status_id()
     {
         return $this->belongsTo(PaymentStatus::class, 'payment_status');
-    }
-
-    public function product_name_id()
-    {
-        return $this->belongsTo(Product::class, 'name');
     }
 }
