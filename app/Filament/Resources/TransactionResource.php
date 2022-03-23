@@ -45,18 +45,22 @@ class TransactionResource extends Resource
                 Forms\Components\BelongsToSelect::make('payment_method')
                     ->relationship('payment_method_id', 'payment_method')
                     ->label('Metode Pembayaran')
-                    ->placeholder('Pilih Metode Pembayaran'),
+                    ->placeholder('Pilih Metode Pembayaran')
+                    ->required(),
                 Forms\Components\BelongsToSelect::make('transaction_type')
                     ->relationship('transaction_type_id', 'transaction_type')
                     ->label('Tipe Transaksi')
-                    ->placeholder('Pilih Tipe Transaksi'),
+                    ->placeholder('Pilih Tipe Transaksi')
+                    ->required(),
                 Forms\Components\BelongsToSelect::make('transaction_category')
                     ->relationship('transaction_category_id', 'transaction_category')
                     ->label('Kategori Transaksi')
-                    ->placeholder('Pilih Kategori Transaksi'),
+                    ->placeholder('Pilih Kategori Transaksi')
+                    ->required(),
                 Forms\Components\TextInput::make('total')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->label('Deskripsi')
