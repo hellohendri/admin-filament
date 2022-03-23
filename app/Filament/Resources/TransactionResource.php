@@ -14,7 +14,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\Grid;
-
+use Filament\Forms\Components\Section;
 
 class TransactionResource extends Resource
 {
@@ -36,35 +36,37 @@ class TransactionResource extends Resource
         $currentDate = date('M d, Y');
 
         return $form
-
             ->schema([
-                Forms\Components\DatePicker::make('date')
-                    ->placeholder(date(now($tz = "Asia/Bangkok")))
-                    ->default(date(now($tz = "Asia/Bangkok")))
-                    ->label('Tanggal'),
-                Forms\Components\BelongsToSelect::make('payment_method')
-                    ->relationship('payment_method_id', 'payment_method')
-                    ->label('Metode Pembayaran')
-                    ->placeholder('Pilih Metode Pembayaran')
-                    ->required(),
-                Forms\Components\BelongsToSelect::make('transaction_type')
-                    ->relationship('transaction_type_id', 'transaction_type')
-                    ->label('Tipe Transaksi')
-                    ->placeholder('Pilih Tipe Transaksi')
-                    ->required(),
-                Forms\Components\BelongsToSelect::make('transaction_category')
-                    ->relationship('transaction_category_id', 'transaction_category')
-                    ->label('Kategori Transaksi')
-                    ->placeholder('Pilih Kategori Transaksi')
-                    ->required(),
-                Forms\Components\TextInput::make('total')
-                    ->required()
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->label('Deskripsi')
-                    ->helperText('Tuliskan detail transaksi disini (Contoh: Peluanasan Invoice PT ATP 09/03/2022).'),
+                Section::make('')
+                    ->schema([
+                        Forms\Components\DatePicker::make('date')
+                            ->placeholder(date(now($tz = "Asia/Bangkok")))
+                            ->default(date(now($tz = "Asia/Bangkok")))
+                            ->label('Tanggal'),
+                        Forms\Components\BelongsToSelect::make('payment_method')
+                            ->relationship('payment_method_id', 'payment_method')
+                            ->label('Metode Pembayaran')
+                            ->placeholder('Pilih Metode Pembayaran')
+                            ->required(),
+                        Forms\Components\BelongsToSelect::make('transaction_type')
+                            ->relationship('transaction_type_id', 'transaction_type')
+                            ->label('Tipe Transaksi')
+                            ->placeholder('Pilih Tipe Transaksi')
+                            ->required(),
+                        Forms\Components\BelongsToSelect::make('transaction_category')
+                            ->relationship('transaction_category_id', 'transaction_category')
+                            ->label('Kategori Transaksi')
+                            ->placeholder('Pilih Kategori Transaksi')
+                            ->required(),
+                        Forms\Components\TextInput::make('total')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->label('Deskripsi')
+                            ->helperText('Tuliskan detail transaksi disini (Contoh: Peluanasan Invoice PT ATP 09/03/2022).'),
+                    ])
+                    ->columns(2)
             ]);
     }
 
