@@ -41,16 +41,16 @@ class OrderResource extends Resource
                 Section::make('Konfigurasi Order')
                     ->schema([
                         Forms\Components\BelongsToSelect::make('cashier')
+                            ->label('Kasir')
                             ->placeholder($getUser)
                             ->default($getUser)
                             ->relationship('cashier_id', 'name')
-                            ->disabled()
-                            ->label('Cashier'),
+                            ->disabled(),
                         Forms\Components\TextInput::make('no_order')
+                            ->label('No. Order')
                             ->placeholder($orderNumber)
                             ->default($orderNumber)
-                            ->disabled()
-                            ->label('No. Order'),
+                            ->disabled(),
                         Forms\Components\BelongsToSelect::make('customer_name')
                             ->relationship('customer_name_id', 'name')
                             ->label('Nama Customer')
