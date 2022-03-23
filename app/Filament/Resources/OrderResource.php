@@ -79,7 +79,6 @@ class OrderResource extends Resource
                         Repeater::make(' ')
                             ->schema([
                                 Forms\Components\Select::make('product_name')
-                                    // ->relationship('product_name_id', 'name')
                                     ->label('Nama Produk')
                                     ->options(Product::where('outlet_name', 1)->pluck('name', 'id')->toArray())
                                     ->placeholder('Pilih Produk')
