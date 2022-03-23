@@ -79,12 +79,12 @@ class OrderResource extends Resource
                                 Forms\Components\Select::make('product_name')
                                     // ->relationship('product_name_id', 'name')
                                     ->label('Nama Produk')
-                                    ->options(Product::where('outlet_name', 1)
-                                        ->pluck('name', 'id')
-                                        ->toArray())
+                                    ->options(Product::where('outlet_name', 1)->pluck('name', 'id')->toArray())
                                     ->placeholder('Pilih Produk')
+                                    ->disablePlaceholderSelection()
+                                    ->required()
                                     ->reactive()
-                                    ->required(),
+                                    ->afterStateUpdated(fn (collable $set) => $set('total_price', null)),
                                 Forms\Components\TextInput::make('quantity')
                                     ->label('Jumlah')
                                     ->default(1)
@@ -93,7 +93,13 @@ class OrderResource extends Resource
                                     ->label('Harga')
                                     ->options(Product::all()
                                         ->pluck('price', 'id'))
-                                    ->placeholder('Price will be auto updated!')
+                                    ->placeholder(function (collable $get) {
+                                        $selectedProduct = Product::find($get('product_name'));
+                                        if (!$selectedProduct) {
+                                            return Product::all()->pluck('price', 'id');
+                                        }
+                                        return $selectedProduct->price->pluck('price', 'id');
+                                    })
                                     ->default('4900')
                                     ->disabled()
                                     ->required(),
