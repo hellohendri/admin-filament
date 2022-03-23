@@ -62,8 +62,8 @@ class OrderResource extends Resource
                         Forms\Components\DateTimePicker::make('date')
                             ->label('Tanggal')
                             ->withoutSeconds()
-                            ->default(date(now()))
-                            ->placeholder(date(now()))
+                            ->default(date(now($tz = "Asia/Bangkok")))
+                            ->placeholder(date(now($tz = "Asia/Bangkok")))
                             ->required(),
                     ])
                     ->columns(3),
@@ -88,34 +88,6 @@ class OrderResource extends Resource
                             ->defaultItems(2)
                             ->createItemButtonLabel('Tambah Produk'),
                     ]),
-                // Repeater::make('Produk')
-                //     ->schema([
-                //         Forms\Components\BelongsToSelect::make('product_name')
-                //             ->relationship('product_name_id', 'name')
-                //             ->label('Nama Produk')
-                //             ->placeholder('Pilih Produk'),
-                //         Forms\Components\TextInput::make('quantity')
-                //             ->label('Jumlah')
-                //             ->required(),
-                //         Forms\Components\TextInput::make('total_price')
-                //             ->label('Harga')
-                //             ->required()
-                //             ->maxLength(255),
-                //     ])
-                //     ->columns(3)
-                //     ->defaultItems(2)
-                //     ->createItemButtonLabel('Tambah Produk'),
-                // Forms\Components\BelongsToSelect::make('product_name')
-                //     ->relationship('product_name_id', 'name')
-                //     ->label('Nama Produk')
-                //     ->placeholder('Pilih Produk'),
-                // Forms\Components\TextInput::make('quantity')
-                //     ->label('Jumlah')
-                //     ->required(),
-                // Forms\Components\TextInput::make('total_price')
-                //     ->label('Harga')
-                //     ->required()
-                //     ->maxLength(255),
             ]);
     }
 

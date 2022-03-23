@@ -23,9 +23,6 @@ class ProductResource extends Resource
 
     public static function form(Form $form): Form
     {
-
-        date_default_timezone_set("Asia/Bangkok");
-
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')

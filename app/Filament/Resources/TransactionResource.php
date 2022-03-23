@@ -41,18 +41,22 @@ class TransactionResource extends Resource
                 Forms\Components\DatePicker::make('date')
                     ->placeholder(date(now($tz = "Asia/Bangkok")))
                     ->default(date(now($tz = "Asia/Bangkok")))
-                    ->required(),
+                    ->label('Tanggal'),
                 Forms\Components\BelongsToSelect::make('payment_method')
-                    ->relationship('payment_method_id', 'payment_method'),
+                    ->relationship('payment_method_id', 'payment_method')
+                    ->label('Metode Pembayaran'),
                 Forms\Components\BelongsToSelect::make('transaction_type')
-                    ->relationship('transaction_type_id', 'transaction_type'),
+                    ->relationship('transaction_type_id', 'transaction_type')
+                    ->label('Tipe Transaksi'),
                 Forms\Components\BelongsToSelect::make('transaction_category')
-                    ->relationship('transaction_category_id', 'transaction_category'),
+                    ->relationship('transaction_category_id', 'transaction_category')
+                    ->label('Kategori Transaksi'),
                 Forms\Components\TextInput::make('total')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->required()
+                    ->label('Deskripsi')
                     ->helperText('Tuliskan detail transaksi disini (Contoh: Peluanasan Invoice PT ATP 09/03/2022).'),
             ]);
     }
