@@ -15,9 +15,11 @@ class OutletResource extends Resource
 {
     protected static ?string $model = Outlet::class;
 
+    protected static ?string $navigationLabel = 'Outlet';
+
     protected static ?string $navigationIcon = 'heroicon-o-library';
 
-    protected static ?string $navigationGroup = 'Products & Outlets';
+    protected static ?string $navigationGroup = 'Produk & Outlet';
 
     protected static ?string $recordTitleAttribute = 'outlet_name';
 

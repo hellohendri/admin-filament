@@ -16,7 +16,9 @@ class TransactionCategoryResource extends Resource
 {
     protected static ?string $model = TransactionCategory::class;
 
-    protected static ?string $navigationGroup = 'Master Management';
+    protected static ?string $navigationLabel = 'Kategori Transaksi';
+
+    protected static ?string $navigationGroup = 'Master Manajemen';
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
 

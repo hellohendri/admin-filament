@@ -27,9 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Filament::serving(function () {
             Filament::registerNavigationGroups([
-                'Master Management',
-                'Products & Outlets',
-                'Sales',
+                'Master Manajemen',
+                'Produk & Outlet',
+                'Penjualan & Transaksi',
             ]);
         });
     }

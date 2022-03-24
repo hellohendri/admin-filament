@@ -15,7 +15,9 @@ class PaymentStatusResource extends Resource
 {
     protected static ?string $model = PaymentStatus::class;
 
-    protected static ?string $navigationGroup = 'Master Management';
+    protected static ?string $navigationLabel = 'Status Pembayaran';
+
+    protected static ?string $navigationGroup = 'Master Manajemen';
 
     protected static ?string $navigationIcon = 'heroicon-o-badge-check';
 
