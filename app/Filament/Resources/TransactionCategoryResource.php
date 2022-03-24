@@ -25,6 +25,7 @@ class TransactionCategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('transaction_category')
+                    ->label('Kategori Transaksi')
                     ->required()
             ]);
     }

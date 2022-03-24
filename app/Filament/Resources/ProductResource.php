@@ -26,24 +26,32 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama Produk')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('product_category')
+                    ->label('Kategori Produk')
                     ->required()
                     ->relationship('product_category_id', 'product_category'),
                 Forms\Components\BelongsToSelect::make('outlet_name')
+                    ->label('Outlet')
                     ->relationship('outlet_name_id', 'outlet_name'),
                 Forms\Components\TextInput::make('stocks')
+                    ->label('Jumlah Stock')
                     ->required(),
                 Forms\Components\TextInput::make('cogs')
+                    ->label('HPP')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
+                    ->label('Harga')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('production_date')
+                    ->label('Tanggal Produksi')
                     ->required(),
                 Forms\Components\DatePicker::make('expired_date')
+                    ->label('Tanggal Expired')
                     ->required(),
             ]);
     }

@@ -26,15 +26,18 @@ class OutletResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('outlet_name')
+                    ->label('Nama Outlet')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
+                    ->label('No. Telp')
                     ->tel()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
+                    ->label('Alamat')
                     ->maxLength(255),
             ]);
     }

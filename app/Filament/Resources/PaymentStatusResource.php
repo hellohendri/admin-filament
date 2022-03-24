@@ -24,6 +24,7 @@ class PaymentStatusResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('payment_status')
+                    ->label('Nama Status Pemabayaran')
                     ->required()
                     ->maxLength(255),
             ]);

@@ -23,7 +23,9 @@ class TransactionTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('transaction_type')->required()
+                Forms\Components\TextInput::make('transaction_type')
+                    ->label('Tipe Transaksi')
+                    ->required()
             ]);
     }
 

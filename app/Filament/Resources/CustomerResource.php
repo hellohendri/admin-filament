@@ -24,10 +24,13 @@ class CustomerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('customer_name')
+                    ->label('Nama Customer')
                     ->required(),
-                Forms\Components\TextInput::make('phone'),
+                Forms\Components\TextInput::make('phone')
+                    ->label('No. Telp'),
                 Forms\Components\TextInput::make('email'),
-                Forms\Components\TextInput::make('address'),
+                Forms\Components\TextInput::make('address')
+                    ->label('Alamat'),
             ]);
     }
 

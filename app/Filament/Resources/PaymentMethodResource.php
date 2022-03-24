@@ -24,6 +24,7 @@ class PaymentMethodResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('payment_method')
+                    ->label('Metode Pembayaran')
                     ->required()
                     ->maxLength(255),
             ]);

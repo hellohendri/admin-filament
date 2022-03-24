@@ -24,6 +24,7 @@ class ProductCategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('product_category')
+                    ->label('Kategori Produk')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('description')
