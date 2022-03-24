@@ -45,4 +45,9 @@ class Order extends Model
     {
         return $this->belongsTo(PaymentStatus::class, 'payment_status');
     }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
 }

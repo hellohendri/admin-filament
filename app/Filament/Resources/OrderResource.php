@@ -37,50 +37,105 @@ class OrderResource extends Resource
 
         return $form
             ->schema([
-                Card::make()
+                Forms\Components\Group::make()
                     ->schema([
-                        Forms\Components\TextInput::make('cashier')
-                            ->default($getUser)
-                            ->disabled(),
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('cashier')
+                                    ->default($getUser)
+                                    ->disabled(),
+                                Forms\Components\TextInput::make('no_order')
+                                    ->default($orderNumber)
+                                    ->disabled(),
+                                Forms\Components\BelongsToSelect::make('customer_name')
+                                    ->relationship('customer_name_id', 'customer_name')
+                                    ->label("Customer")
+                                    ->placeholder('Pilih Customer')
+                                    ->getOptionLabelUsing(fn ($value): ?string => Customer::find($value)?->name)
+                                    ->required(),
+                                Forms\Components\BelongsToSelect::make('payment_method')
+                                    ->relationship('payment_method_id', 'payment_method')
+                                    ->label('Metode Pembayaran')
+                                    ->placeholder('Pilih Metode Pembayaran')
+                                    ->getOptionLabelUsing(fn ($value): ?string => PaymentMethod::find($value)?->customer_name)
+                                    ->required(),
+                                Forms\Components\BelongsToSelect::make('payment_status')
+                                    ->relationship('payment_status_id', 'payment_status')
+                                    ->label('Status Pembayaran')
+                                    ->placeholder('Pilih Status Pembayaran')
+                                    ->getOptionLabelUsing(fn ($value): ?string => PaymentStatus::find($value)?->customer_name)
+                                    ->required(),
+                                Forms\Components\MarkdownEditor::make('notes')
+                                    ->columnSpan([
+                                        'sm' => 2,
+                                    ]),
+                            ])->columnSpan([
+                                'sm' => 2,
+                            ])
+                    ])->columns([
+                        'sm' => 2,
+                    ]),
 
-                        Forms\Components\TextInput::make('no_order')
-                            ->default($orderNumber)
-                            ->disabled(),
 
-                        Forms\Components\Select::make('customer_name')
-                            ->label("Customer")
-                            ->placeholder('Pilih Customer')
-                            ->options(Customer::all()->pluck('customer_name', 'id')->toArray())
-                            ->required(),
 
-                        Forms\Components\Select::make('payment_method')
-                            ->label('Metode Pembayaran')
-                            ->placeholder('Pilih Metode Pembayaran')
-                            ->options(PaymentMethod::all()->pluck('payment_method', 'id')->toArray())
-                            ->required(),
 
-                        Forms\Components\Select::make('payment_status')
-                            ->label('Status Pembayaran')
-                            ->placeholder('Pilih Status Pembayaran')
-                            ->options(PaymentStatus::all()->pluck('payment_status', 'id')->toArray())
-                            ->required(),
 
-                        Forms\Components\DateTimePicker::make('date')
-                            ->label('Tanggal')
-                            ->withoutSeconds()
-                            ->default(date(now($tz = "Asia/Bangkok")))
-                            ->placeholder(date(now($tz = "Asia/Bangkok"))),
 
-                        Forms\Components\TextInput::make('quantity')
-                            ->numeric()
-                            ->default($quantity),
 
-                        Forms\Components\TextInput::make('total_price')
-                            ->numeric()
-                            ->default($totalPrice)
-                            ->columnSpan(2),
-                    ])
-                    ->columns(3),
+
+
+
+
+
+
+
+
+
+
+                // Card::make()
+                //     ->schema([
+                //         Forms\Components\TextInput::make('cashier')
+                //             ->default($getUser)
+                //             ->disabled(),
+
+                //         Forms\Components\TextInput::make('no_order')
+                //             ->default($orderNumber)
+                //             ->disabled(),
+
+                //         Forms\Components\Select::make('customer_name')
+                //             ->label("Customer")
+                //             ->placeholder('Pilih Customer')
+                //             ->options(Customer::all()->pluck('customer_name', 'id')->toArray())
+                //             ->required(),
+
+                //         Forms\Components\Select::make('payment_method')
+                //             ->label('Metode Pembayaran')
+                //             ->placeholder('Pilih Metode Pembayaran')
+                //             ->options(PaymentMethod::all()->pluck('payment_method', 'id')->toArray())
+                //             ->required(),
+
+                //         Forms\Components\Select::make('payment_status')
+                //             ->label('Status Pembayaran')
+                //             ->placeholder('Pilih Status Pembayaran')
+                //             ->options(PaymentStatus::all()->pluck('payment_status', 'id')->toArray())
+                //             ->required(),
+
+                //         Forms\Components\DateTimePicker::make('date')
+                //             ->label('Tanggal')
+                //             ->withoutSeconds()
+                //             ->default(date(now($tz = "Asia/Bangkok")))
+                //             ->placeholder(date(now($tz = "Asia/Bangkok"))),
+
+                //         Forms\Components\TextInput::make('quantity')
+                //             ->numeric()
+                //             ->default($quantity),
+
+                //         Forms\Components\TextInput::make('total_price')
+                //             ->numeric()
+                //             ->default($totalPrice)
+                //             ->columnSpan(2),
+                //     ])
+                //     ->columns(3),
 
                 // Repeater::make("Produk")
                 //     ->schema([
@@ -217,12 +272,17 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('cashier'),
-                Tables\Columns\TextColumn::make('no_order'),
+                Tables\Columns\TextColumn::make('no_order')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('customer_name_id.customer_name'),
                 Tables\Columns\TextColumn::make('payment_method_id.payment_method'),
-                Tables\Columns\TextColumn::make('payment_status_id.payment_status'),
-                Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\BadgeColumn::make('payment_status_id.payment_status')
+                    ->colors([
+                        'secondary',
+                        'danger' => 'Pending',
+                        'warning' => 'Processing',
+                        'success' => 'Confirmed',
+                    ]),
                 Tables\Columns\TextColumn::make('total_price'),
                 Tables\Columns\TextColumn::make('date')
                     ->dateTime(),
