@@ -87,7 +87,7 @@ class OrderResource extends Resource
                             ->schema([
                                 Forms\Components\Select::make('product_id')
                                     ->label('Produk')
-                                    ->options(Product::query()->pluck('name', 'id'))
+                                    ->options(Product::where('outlet_name', 1)->pluck('name', 'id'))
                                     ->required()
                                     ->reactive()
                                     ->afterStateUpdated(fn ($state, callable $set) => $set('unit_price', Product::find($state)?->price ?? 0))

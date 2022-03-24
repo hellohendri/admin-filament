@@ -17,7 +17,7 @@ class Outlet extends Model
     ];
 
     protected $fillable = [
-        "name",
+        "outlet_name",
         "phone",
         "email",
         "address",
