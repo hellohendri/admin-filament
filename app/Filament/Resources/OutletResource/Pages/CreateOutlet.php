@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateOutlet extends CreateRecord
 {
     protected static string $resource = OutletResource::class;
+
+    protected static ?string $title = 'Tambah Outlet';
 }

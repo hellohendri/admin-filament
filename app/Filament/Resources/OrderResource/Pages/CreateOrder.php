@@ -9,6 +9,8 @@ class CreateOrder extends CreateRecord
 {
     protected static string $resource = OrderResource::class;
 
+    protected static ?string $title = 'Buat Order';
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $total = 0;

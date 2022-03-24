@@ -8,4 +8,6 @@ use Filament\Resources\Pages\ListRecords;
 class ListPaymentMethods extends ListRecords
 {
     protected static string $resource = PaymentMethodResource::class;
+
+    protected static ?string $title = 'Metode Pembayaran';
 }

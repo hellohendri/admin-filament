@@ -8,4 +8,6 @@ use Filament\Resources\Pages\EditRecord;
 class EditProductCategory extends EditRecord
 {
     protected static string $resource = ProductCategoryResource::class;
+
+    protected static ?string $title = 'Edit Kategori Produk';
 }

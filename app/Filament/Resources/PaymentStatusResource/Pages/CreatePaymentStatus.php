@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePaymentStatus extends CreateRecord
 {
     protected static string $resource = PaymentStatusResource::class;
+
+    protected static ?string $title = 'Tambah Status Pembayaran';
 }

@@ -8,4 +8,6 @@ use Filament\Resources\Pages\ListRecords;
 class ListOutlets extends ListRecords
 {
     protected static string $resource = OutletResource::class;
+
+    protected static ?string $title = 'Outlet';
 }

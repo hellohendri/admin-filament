@@ -9,6 +9,8 @@ class CreateTransaction extends CreateRecord
 {
     protected static string $resource = TransactionResource::class;
 
+    protected static ?string $title = 'Tambah Transaksi';
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

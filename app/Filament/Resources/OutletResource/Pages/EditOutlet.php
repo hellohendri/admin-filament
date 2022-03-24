@@ -8,4 +8,6 @@ use Filament\Resources\Pages\EditRecord;
 class EditOutlet extends EditRecord
 {
     protected static string $resource = OutletResource::class;
+
+    protected static ?string $title = 'Edit Outlet';
 }

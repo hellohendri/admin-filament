@@ -9,6 +9,8 @@ class ListTransactions extends ListRecords
 {
     protected static string $resource = TransactionResource::class;
 
+    protected static ?string $title = 'Transaksi';
+
     protected function getHeaderWidgets(): array
     {
         return [

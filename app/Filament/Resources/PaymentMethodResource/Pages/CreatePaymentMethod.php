@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePaymentMethod extends CreateRecord
 {
     protected static string $resource = PaymentMethodResource::class;
+
+    protected static ?string $title = 'Tambah Metode Pembayaran';
 }

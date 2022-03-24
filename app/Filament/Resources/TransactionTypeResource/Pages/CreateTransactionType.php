@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTransactionType extends CreateRecord
 {
     protected static string $resource = TransactionTypeResource::class;
+
+    protected static ?string $title = 'Tambah Tipe Transaksi';
 }

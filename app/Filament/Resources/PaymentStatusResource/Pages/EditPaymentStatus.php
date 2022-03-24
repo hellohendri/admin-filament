@@ -8,4 +8,6 @@ use Filament\Resources\Pages\EditRecord;
 class EditPaymentStatus extends EditRecord
 {
     protected static string $resource = PaymentStatusResource::class;
+
+    protected static ?string $title = 'Edit Status Pembayaran';
 }

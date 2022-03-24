@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTransactionCategory extends CreateRecord
 {
     protected static string $resource = TransactionCategoryResource::class;
+
+    protected static ?string $title = 'Tambah Kategori Transaksi';
 }

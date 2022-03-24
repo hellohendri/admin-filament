@@ -8,4 +8,6 @@ use Filament\Resources\Pages\EditRecord;
 class EditTransactionType extends EditRecord
 {
     protected static string $resource = TransactionTypeResource::class;
+
+    protected static ?string $title = 'Edit Tipe Transaksi';
 }
