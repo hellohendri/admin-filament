@@ -34,7 +34,7 @@ class Order extends Model
 
     public function customer_name_id()
     {
-        return $this->belongsTo(Customer::class, 'name');
+        return $this->belongsTo(Customer::class, 'customer_name');
     }
 
     public function payment_method_id()

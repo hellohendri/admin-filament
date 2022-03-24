@@ -23,7 +23,7 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('customer_name')
                     ->required(),
                 Forms\Components\TextInput::make('phone'),
                 Forms\Components\TextInput::make('email'),
@@ -35,7 +35,7 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('customer_name'),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('address'),
