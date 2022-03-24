@@ -17,7 +17,7 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationLabel = 'Customer';
 
-    protected static ?string $navigationGroup = 'Master Manajemen';
+    protected static ?string $navigationGroup = 'Penjualan & Transaksi';
 
     protected static ?string $navigationIcon = 'heroicon-o-emoji-happy';
 
