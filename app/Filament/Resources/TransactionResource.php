@@ -78,8 +78,13 @@ class TransactionResource extends Resource
                     ->label('Tanggal')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('transaction_type_id.transaction_type')
-                    ->label("Tipe Transaksi"),
+                Tables\Columns\BadgeColumn::make('transaction_type_id.transaction_type')
+                    ->label("Tipe Transaksi")
+                    ->colors([
+                        'secondary',
+                        'danger' => 'Keluar',
+                        'success' => 'Masuk',
+                    ]),
                 Tables\Columns\TextColumn::make('total')
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('description')
