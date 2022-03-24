@@ -22,7 +22,6 @@ class Order extends Model
         "customer_name",
         "payment_method",
         "payment_status",
-        "quantity",
         "total_price",
         "date",
     ];
