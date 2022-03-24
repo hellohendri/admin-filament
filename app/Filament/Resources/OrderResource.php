@@ -32,8 +32,6 @@ class OrderResource extends Resource
     {
         $orderNumber = 'OR-' . random_int(100000, 999999);
         $getUser = auth()->user()->name;
-        $quantity = 0;
-        $totalPrice = 0;
 
         return $form
             ->schema([
@@ -72,23 +70,50 @@ class OrderResource extends Resource
                             ])->columns([
                                 'sm' => 2,
                             ]),
-                        Forms\Components\Card::make()
-                            ->schema([
-                                Forms\Components\Placeholder::make('Produk'),
-                                Forms\Components\HasManyRepeater::make('items')
-                                    ->relationship('items')
-                                    ->schema([
-                                        Forms\Components\Select::make('shop_product_id')
-                                            ->label('Product')
-                                            ->options(Product::query()->pluck('name', 'id'))
-                                            ->required()
-                                            ->reactive()
-                                            ->afterStateUpdated(fn ($state, callable $set) => $set('unit_price', Product::find($state)?->price ?? 0))
-                                            ->columnSpan([
-                                                'md' => 5,
-                                            ]),
-                                    ])
-                            ])
+                        // Forms\Components\Card::make()
+                        //     ->schema([
+                        //         Forms\Components\Placeholder::make('Produk'),
+                        //         // Forms\Components\HasManyRepeater::make('items')
+                        //         //     ->relationship('items')
+                        //         //     ->schema([
+                        //         //         Forms\Components\Select::make('product_id')
+                        //         //             ->label('Product')
+                        //         //             ->options(Product::query()->pluck('name', 'id'))
+                        //         //             ->required()
+                        //         //             ->reactive()
+                        //         //             ->afterStateUpdated(fn ($state, callable $set) => $set('unit_price', Product::find($state)?->price ?? 0))
+                        //         //             ->columnSpan([
+                        //         //                 'md' => 5,
+                        //         //             ]),
+                        //         //         Forms\Components\TextInput::make('qty')
+                        //         //             ->numeric()
+                        //         //             ->mask(
+                        //         //                 fn (Forms\Components\TextInput\Mask $mask) => $mask
+                        //         //                     ->numeric()
+                        //         //                     ->integer()
+                        //         //             )
+                        //         //             ->default(1)
+                        //         //             ->columnSpan([
+                        //         //                 'md' => 2,
+                        //         //             ])
+                        //         //             ->required(),
+                        //         //         Forms\Components\TextInput::make('unit_price')
+                        //         //             ->label('Unit Price')
+                        //         //             ->disabled()
+                        //         //             ->numeric()
+                        //         //             ->required()
+                        //         //             ->columnSpan([
+                        //         //                 'md' => 3,
+                        //         //             ]),
+                        //         //     ])
+                        //         //     ->dehydrated()
+                        //         //     ->defaultItems(1)
+                        //         //     ->disableLabel()
+                        //         //     ->columns([
+                        //         //         'md' => 10,
+                        //         //     ])
+                        //         //     ->required(),
+                        //     ])->columnSpan(1),
                     ])
             ])
             ->columns([
