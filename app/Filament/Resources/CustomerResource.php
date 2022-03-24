@@ -35,10 +35,16 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer_name'),
-                Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('address'),
+                Tables\Columns\TextColumn::make('customer_name')
+                    ->label('Nama Customer')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('No HP')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email'),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Alamat'),
             ])
             ->filters([
                 //

@@ -52,18 +52,33 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('product_category_id.product_category'),
-                Tables\Columns\TextColumn::make('outlet_name_id.outlet_name'),
-                Tables\Columns\TextColumn::make('stocks'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Produk')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('product_category_id.product_category')
+                    ->label('Kategori Produk'),
+                Tables\Columns\TextColumn::make('outlet_name_id.outlet_name')
+                    ->label('Nama Outlet'),
+                Tables\Columns\TextColumn::make('stocks')
+                    ->label('Jumlah Stock'),
                 Tables\Columns\TextColumn::make('cogs')
+                    ->label('HPP')
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('price')
+                    ->label('Harga')
                     ->money('idr', true),
                 Tables\Columns\TextColumn::make('production_date')
+                    ->label('Tanggal Produksi')
                     ->date(),
                 Tables\Columns\TextColumn::make('expired_date')
+                    ->label('Tanggal Expired')
                     ->date(),
+            ])
+            ->pushActions([
+                Tables\Actions\LinkAction::make('delete')
+                    ->action(fn (Transaction $record) => $record->delete())
+                    ->requiresConfirmation()
+                    ->color('danger'),
             ])
             ->filters([
                 //

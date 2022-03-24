@@ -33,11 +33,8 @@ class PaymentMethodResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('payment_method'),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
+                Tables\Columns\TextColumn::make('payment_method')
+                    ->label('Metode Pembayaran'),
             ])
             ->filters([
                 //

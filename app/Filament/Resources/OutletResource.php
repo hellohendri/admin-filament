@@ -43,14 +43,13 @@ class OutletResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('outlet_name'),
-                Tables\Columns\TextColumn::make('phone'),
+                Tables\Columns\TextColumn::make('outlet_name')
+                    ->label('Nama Outlet'),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('No HP'),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('address'),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Alamat'),
             ])
             ->filters([
                 //

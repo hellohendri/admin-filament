@@ -35,12 +35,10 @@ class ProductCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product_category'),
-                Tables\Columns\TextColumn::make('description'),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
+                Tables\Columns\TextColumn::make('product_category')
+                    ->label('Kategori Produk'),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi'),
             ])
             ->filters([
                 //

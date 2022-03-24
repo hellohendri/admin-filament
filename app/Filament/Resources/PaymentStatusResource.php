@@ -33,11 +33,8 @@ class PaymentStatusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('payment_status'),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime(),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime(),
+                Tables\Columns\TextColumn::make('payment_status')
+                    ->label('Status Pembayaran'),
             ])
             ->filters([
                 //

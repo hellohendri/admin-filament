@@ -31,7 +31,9 @@ class TransactionTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('transaction_type')->sortable(),
+                Tables\Columns\TextColumn::make('transaction_type')
+                    ->label('Tipe Transaksi')
+                    ->sortable(),
             ])
             ->filters([
                 //

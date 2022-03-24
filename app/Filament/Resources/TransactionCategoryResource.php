@@ -33,8 +33,9 @@ class TransactionCategoryResource extends Resource
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('transaction_category'),
+                Tables\Columns\TextColumn::make('transaction_category')
+                    ->label('Kategori Transaksi')
+                    ->sortable(),
             ])
             ->filters([
                 //
