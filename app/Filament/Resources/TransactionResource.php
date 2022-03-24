@@ -104,7 +104,7 @@ class TransactionResource extends Resource
                 Filter::make('date')
                     ->form([
                         Forms\Components\DatePicker::make('date_from'),
-                        Forms\Components\DatePicker::make('date_until')->default(now($tz = "Asia/Bangkok")),
+                        Forms\Components\DatePicker::make('date_until')->default(now($tz = "Asia/Jakarta")),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
