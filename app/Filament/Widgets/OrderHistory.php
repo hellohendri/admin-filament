@@ -25,11 +25,25 @@ class OrderHistory extends LineChartWidget
             ->perDay()
             ->sum('qty');
 
+        $snackBanyuwangi = Trend::query(OrderItem::where('product_id', '3'))
+            ->between(
+                start: now()->startOfMonth(),
+                end: now()->endOfMonth(),
+            )
+            ->perDay()
+            ->sum('qty');
+
         return [
             'datasets' => [
                 [
                     'label' => 'Paket Snack Surabaya',
                     'data' => $snackSurabaya->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => 'rgb(154, 220, 255)',
+                ],
+                [
+                    'label' => 'Paket Snack Banyuwangi',
+                    'data' => $snackBanyuwangi->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => 'rgb(255, 138, 174)',
                 ],
             ],
             'labels' => $snackSurabaya->map(fn (TrendValue $value) => $value->date),
