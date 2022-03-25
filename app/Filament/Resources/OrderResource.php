@@ -137,6 +137,10 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('no_order')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer_name_id.customer_name')
@@ -155,10 +159,6 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total_price')
                     ->label('Total Harga')
                     ->money('idr', true),
-                Tables\Columns\TextColumn::make('date')
-                    ->label('Tanggal')
-                    ->dateTime()
-                    ->sortable(),
             ])
             ->defaultSort('date', 'desc')
             ->filters([
