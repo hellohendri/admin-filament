@@ -161,12 +161,6 @@ class OrderResource extends Resource
                     ->sortable(),
             ])
             ->defaultSort('date', 'desc')
-            ->pushActions([
-                Tables\Actions\LinkAction::make('delete')
-                    ->action(fn (Transaction $record) => $record->delete())
-                    ->requiresConfirmation()
-                    ->color('danger'),
-            ])
             ->filters([
                 SelectFilter::make('payment_status')
                     ->options([
