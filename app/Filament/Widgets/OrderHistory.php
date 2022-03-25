@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use App\Models\OrderItem;
+
+use Filament\Widgets\LineChartWidget;
+use Flowframe\Trend\Trend;
+use Flowframe\Trend\TrendValue;
+
+class OrderHistory extends LineChartWidget
+{
+    protected static ?string $heading = 'Riwayat Penjualan Produk Bulan Ini';
+
+    protected int | string | array $columnSpan = 'full';
+
+    protected function getData(): array
+    {
+
+        $snackSurabaya = Trend::query(OrderItem::where('product_id', '2'))
+            ->between(
+                start: now()->startOfMonth(),
+                end: now()->endOfMonth(),
+            )
+            ->perDay()
+            ->sum('qty');
+
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Paket Snack Surabaya',
+                    'data' => $snackSurabaya->map(fn (TrendValue $value) => $value->aggregate),
+                ],
+            ],
+            'labels' => $snackSurabaya->map(fn (TrendValue $value) => $value->date),
+        ];
+    }
+}
