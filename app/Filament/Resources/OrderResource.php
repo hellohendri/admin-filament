@@ -87,6 +87,15 @@ class OrderResource extends Resource
                         Forms\Components\HasManyRepeater::make('items')
                             ->relationship('items')
                             ->schema([
+                                // Hidden DateTimePicker (get current date time for chart filtering)
+                                Forms\Components\DateTimePicker::make('date')
+                                    ->placeholder(date(now($tz = "Asia/Jakarta")))
+                                    ->default(date(now($tz = "Asia/Jakarta")))
+                                    ->label('Tanggal')
+                                    ->columnSpan([
+                                        'md' => 2,
+                                    ]),
+                                // End of hidden date
                                 Forms\Components\Select::make('product_id')
                                     ->label('Produk')
                                     ->options(Product::where('outlet_name', 1)->pluck('name', 'id'))
@@ -94,7 +103,7 @@ class OrderResource extends Resource
                                     ->reactive()
                                     ->afterStateUpdated(fn ($state, callable $set) => $set('unit_price', Product::find($state)?->price ?? 0))
                                     ->columnSpan([
-                                        'md' => 5,
+                                        'md' => 3,
                                     ]),
                                 Forms\Components\TextInput::make('qty')
                                     ->numeric()

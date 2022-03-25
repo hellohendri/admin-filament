@@ -15,5 +15,6 @@ class OrderItem extends Model
         'product_id',
         'qty',
         'unit_price',
+        'date'
     ];
 }
