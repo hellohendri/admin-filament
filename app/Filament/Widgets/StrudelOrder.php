@@ -31,7 +31,7 @@ class StrudelOrder extends LineChartWidget
 
         $activeFilter = $this->filter;
 
-        $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', 5))
+        $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', '6'))
             ->between(
                 start: now()->startOfMonth(),
                 end: now()->endOfMonth(),
