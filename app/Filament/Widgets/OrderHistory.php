@@ -69,11 +69,6 @@ class OrderHistory extends LineChartWidget
                     'borderColor' => 'rgb(182, 255, 206)',
                 ],
                 [
-                    'label' => 'Paket Snack Bromo',
-                    'data' => $snackBromo->map(fn (TrendValue $value) => $value->aggregate),
-                    'borderColor' => 'rgb(182, 255, 206)',
-                ],
-                [
                     'label' => 'Strudel Pisang Coklat',
                     'data' => $strudelPisangCoklat->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => 'rgb(253, 215, 170)',
