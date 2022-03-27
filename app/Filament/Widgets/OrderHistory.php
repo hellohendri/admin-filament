@@ -12,6 +12,8 @@ class OrderHistory extends LineChartWidget
 {
     protected static ?string $heading = 'Riwayat Penjualan Produk Bulan Ini';
 
+    protected static ?int $sort = 2;
+
     protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
