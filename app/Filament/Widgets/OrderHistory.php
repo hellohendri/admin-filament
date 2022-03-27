@@ -15,8 +15,22 @@ class OrderHistory extends LineChartWidget
 
     // protected int | string | array $columnSpan = 'full';
 
+    public ?string $filter = 'today';
+
+    protected function getFilters(): ?array
+    {
+        return [
+            'today' => 'Today',
+            'week' => 'Last week',
+            'month' => 'Last month',
+            'year' => 'This year',
+        ];
+    }
+
     protected function getData(): array
     {
+
+        $activeFilter = $this->filter;
 
         $snackSurabaya = Trend::query(OrderItem::where('product_id', '2'))
             ->between(
