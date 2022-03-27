@@ -9,5 +9,5 @@ class EditOrder extends EditRecord
 {
     protected static string $resource = OrderResource::class;
 
-    protected static ?string $title = 'Edit Order';
+    protected static ?string $title = 'Edit Penjualan';
 }

@@ -9,5 +9,5 @@ class ListOrders extends ListRecords
 {
     protected static string $resource = OrderResource::class;
 
-    protected static ?string $title = 'Order';
+    protected static ?string $title = 'Penjualan';
 }

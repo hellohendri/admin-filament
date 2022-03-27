@@ -35,6 +35,22 @@ class OrderHistory extends LineChartWidget
             ->perDay()
             ->sum('qty');
 
+        $snackBromo = Trend::query(OrderItem::where('product_id', '4'))
+            ->between(
+                start: now()->startOfMonth(),
+                end: now()->endOfMonth(),
+            )
+            ->perDay()
+            ->sum('qty');
+
+        $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', '5'))
+            ->between(
+                start: now()->startOfMonth(),
+                end: now()->endOfMonth(),
+            )
+            ->perDay()
+            ->sum('qty');
+
         return [
             'datasets' => [
                 [
@@ -46,6 +62,21 @@ class OrderHistory extends LineChartWidget
                     'label' => 'Paket Snack Banyuwangi',
                     'data' => $snackBanyuwangi->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => 'rgb(255, 138, 174)',
+                ],
+                [
+                    'label' => 'Paket Snack Bromo',
+                    'data' => $snackBromo->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => 'rgb(182, 255, 206)',
+                ],
+                [
+                    'label' => 'Paket Snack Bromo',
+                    'data' => $snackBromo->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => 'rgb(182, 255, 206)',
+                ],
+                [
+                    'label' => 'Strudel Pisang Coklat',
+                    'data' => $strudelPisangCoklat->map(fn (TrendValue $value) => $value->aggregate),
+                    'borderColor' => 'rgb(253, 215, 170)',
                 ],
             ],
             'labels' => $snackSurabaya->map(fn (TrendValue $value) => $value->date),

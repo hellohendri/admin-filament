@@ -15,9 +15,10 @@ class OrderStatusOverview extends BaseWidget
     public $orderConfirmed;
     public $orderPending;
 
+    protected static ?string $heading = 'Overview Status Penjualan';
+
     protected function getCards(): array
     {
-        $currentMonth = date('m');
 
         $totalOrder = Order::all()
             ->count();
@@ -30,15 +31,15 @@ class OrderStatusOverview extends BaseWidget
 
         return [
             Card::make('Total Penjualan', $totalOrder)
-                ->description('Total penjualan bulan ini')
+                ->description('Total Penjualan')
                 ->descriptionIcon('heroicon-s-shopping-cart')
                 ->color('primary'),
             Card::make('Penjualan Terkonfirmasi', $orderConfirmed)
-                ->description('Total penjualan terkonfirmasi bulan ini')
+                ->description('Total Penjualan Terkonfirmasi')
                 ->descriptionIcon('heroicon-s-badge-check')
                 ->color('success'),
             Card::make('Penjualan Pending', $orderPending)
-                ->description('Total penjualan pending bulan ini')
+                ->description('Total Penjualan Pending')
                 ->descriptionIcon('heroicon-s-minus-circle')
                 ->color('danger'),
         ];
