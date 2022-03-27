@@ -10,11 +10,11 @@ use Flowframe\Trend\TrendValue;
 
 class OrderHistory extends LineChartWidget
 {
-    protected static ?string $heading = 'Riwayat Penjualan Produk Bulan Ini';
+    protected static ?string $heading = 'Riwayat Penjualan Paket Snack Abimanyu Travel';
 
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 'full';
+    // protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
     {
@@ -43,35 +43,22 @@ class OrderHistory extends LineChartWidget
             ->perDay()
             ->sum('qty');
 
-        $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', '5'))
-            ->between(
-                start: now()->startOfMonth(),
-                end: now()->endOfMonth(),
-            )
-            ->perDay()
-            ->sum('qty');
-
         return [
             'datasets' => [
                 [
-                    'label' => 'Paket Snack Surabaya',
+                    'label' => 'Snack Surabaya',
                     'data' => $snackSurabaya->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => 'rgb(154, 220, 255)',
                 ],
                 [
-                    'label' => 'Paket Snack Banyuwangi',
+                    'label' => 'Snack Banyuwangi',
                     'data' => $snackBanyuwangi->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => 'rgb(255, 138, 174)',
                 ],
                 [
-                    'label' => 'Paket Snack Bromo',
+                    'label' => 'Snack Bromo',
                     'data' => $snackBromo->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => 'rgb(182, 255, 206)',
-                ],
-                [
-                    'label' => 'Strudel Pisang Coklat',
-                    'data' => $strudelPisangCoklat->map(fn (TrendValue $value) => $value->aggregate),
-                    'borderColor' => 'rgb(253, 215, 170)',
                 ],
             ],
             'labels' => $snackSurabaya->map(fn (TrendValue $value) => $value->date),
