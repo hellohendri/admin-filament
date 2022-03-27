@@ -3,7 +3,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\OrderItem;
-
 use Filament\Widgets\LineChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;

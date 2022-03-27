@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\OrderResource\Widgets;
 
 use App\Models\Order;
-
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
@@ -19,7 +18,6 @@ class OrderStatusOverview extends BaseWidget
 
     protected function getCards(): array
     {
-
         $totalOrder = Order::all()
             ->count();
 

@@ -35,6 +35,13 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
+    public static function getWidgets(): array
+    {
+        return [
+            Widgets\OrderStatusOverview::class,
+        ];
+    }
+
     public static function form(Form $form): Form
     {
         $orderNumber = 'OR-' . random_int(100000, 999999);
