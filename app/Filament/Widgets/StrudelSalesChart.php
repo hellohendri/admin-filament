@@ -13,15 +13,15 @@ class StrudelSalesChart extends LineChartWidget
 
     protected static ?int $sort = 3;
 
-    public ?string $filter = 'today';
+    public ?string $filter = 'month';
 
     protected function getFilters(): ?array
     {
         return [
             'today' => 'Today',
-            'week' => 'Last week',
-            'month' => 'Last month',
-            'year' => 'This year',
+            'week' => 'This Week',
+            'month' => 'This Month',
+            'year' => 'This Year',
         ];
     }
 
@@ -29,6 +29,16 @@ class StrudelSalesChart extends LineChartWidget
     {
 
         $activeFilter = $this->filter;
+
+        if ($activeFilter = 'today') {
+            $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', '5'))
+                ->between(
+                    start: now()->startOfDay(),
+                    end: now()->endOfDay(),
+                )
+                ->perDay()
+                ->sum('qty');
+        }
 
         $strudelPisangCoklat = Trend::query(OrderItem::where('product_id', '5'))
             ->between(

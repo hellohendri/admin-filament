@@ -15,15 +15,15 @@ class OrderHistory extends LineChartWidget
 
     // protected int | string | array $columnSpan = 'full';
 
-    public ?string $filter = 'today';
+    public ?string $filter = 'month';
 
     protected function getFilters(): ?array
     {
         return [
             'today' => 'Today',
-            'week' => 'Last week',
-            'month' => 'Last month',
-            'year' => 'This year',
+            'week' => 'This Week',
+            'month' => 'This Month',
+            'year' => 'This Year',
         ];
     }
 
