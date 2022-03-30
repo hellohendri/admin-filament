@@ -101,9 +101,11 @@ class ProductResource extends Resource
                         '2' => 'Snack Banyuwangi',
                         '3' => 'Snack Surabaya',
                         '4' => 'Snack Travel',
+                        '5' => 'Strudel Mini',
                         '6' => 'Paket Custom'
                     ])
                     ->column('product_category')
+                    ->searchable()
             ]);
     }
 
