@@ -10,6 +10,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
 
 class ProductResource extends Resource
 {
@@ -64,6 +66,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Produk')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('product_category_id.product_category')
                     ->label('Kategori Produk'),
@@ -84,6 +87,7 @@ class ProductResource extends Resource
                 //     ->label('Tanggal Expired')
                 //     ->date(),
             ])
+            ->defaultSort('name')
             ->pushActions([
                 Tables\Actions\LinkAction::make('delete')
                     ->action(fn (Transaction $record) => $record->delete())
@@ -91,7 +95,15 @@ class ProductResource extends Resource
                     ->color('danger'),
             ])
             ->filters([
-                //
+                SelectFilter::make('product_category')
+                    ->options([
+                        '1' => 'Strudel',
+                        '2' => 'Snack Banyuwangi',
+                        '3' => 'Snack Surabaya',
+                        '4' => 'Snack Travel',
+                        '6' => 'Paket Custom'
+                    ])
+                    ->column('product_category')
             ]);
     }
 
