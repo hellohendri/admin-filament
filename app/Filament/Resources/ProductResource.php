@@ -106,6 +106,7 @@ class ProductResource extends Resource
                     ])
                     ->column('product_category')
                     ->searchable()
+                    ->label('Kategori Produk')
             ]);
     }
 

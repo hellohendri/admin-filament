@@ -39,10 +39,13 @@ class ProductCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('product_category')
-                    ->label('Kategori Produk'),
+                    ->label('Kategori Produk')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi'),
             ])
+            ->defaultSort('product_category')
             ->filters([
                 //
             ]);

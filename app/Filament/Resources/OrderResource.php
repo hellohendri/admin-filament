@@ -83,12 +83,13 @@ class OrderResource extends Resource
                                     ->label('Tanggal'),
                                 Forms\Components\MarkdownEditor::make('notes')
                                     ->columnSpan([
-                                        'sm' => 2,
+                                        'sm' => 3,
                                     ]),
                             ])->columns([
-                                'sm' => 2,
+                                'sm' => 3
                             ]),
                     ]),
+
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\Placeholder::make('Items'),
@@ -145,7 +146,7 @@ class OrderResource extends Resource
                     ])->columnSpan(1)
             ])
             ->columns([
-                'sm' => 2,
+                // 'sm' => 2,
                 'lg' => null,
             ]);
     }
